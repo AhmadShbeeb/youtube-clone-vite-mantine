@@ -11,7 +11,7 @@ function App() {
       header={<Header opened={opened} setOpened={setOpened} />}
       navbar={<Navbar opened={opened} setOpened={setOpened} />}
     >
-      <p>123</p>
+      <p>Feed</p>
     </AppShell>
   )
 }

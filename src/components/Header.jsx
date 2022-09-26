@@ -25,8 +25,9 @@ export const Header = ({ opened, setOpened }) => {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
             height: '50%',
+            // flex: '0',
+            // justifyContent: 'space-between',
             marginRight: '15px',
           }}
         >
@@ -91,13 +92,13 @@ export const Header = ({ opened, setOpened }) => {
         <div
           style={{
             display: 'flex',
-            flexBasis: '350px',
+            flexBasis: '500px',
           }}
         >
           <Autocomplete
             placeholder='Search'
             data={['React', 'Angular', 'Svelte', 'Vue']}
-            sx={{ width: '500%' }}
+            sx={{ width: '80%' }}
           />
 
           <ActionIcon

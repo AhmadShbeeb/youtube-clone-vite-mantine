@@ -13,7 +13,7 @@ import { IconGitPullRequest } from '@tabler/icons'
 import { useEffect } from 'react'
 
 export const Navbar = ({ opened, setOpened }) => {
-  const minWidth = 250
+  const minWidth = 200
   const iconSize = 25
   const matches = useMediaQuery(`(min-width: ${minWidth}px)`)
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
@@ -30,7 +30,7 @@ export const Navbar = ({ opened, setOpened }) => {
         // hidden={!opened}
         // height={600}
         p='xs'
-        width={{ sm: minWidth, lg: 500, base: minWidth }}
+        width={{ base: minWidth }}
         sx={{ zIndex: '1' }}
       >
         {/* Grow section will take all available space that is not taken by first and last sections */}
