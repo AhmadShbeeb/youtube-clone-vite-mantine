@@ -9,7 +9,7 @@ function App() {
     <AppShell
       padding='md'
       header={<Header opened={opened} setOpened={setOpened} />}
-      navbar={<Navbar opened={opened} />}
+      navbar={<Navbar opened={opened} setOpened={setOpened} />}
     >
       <p>123</p>
     </AppShell>

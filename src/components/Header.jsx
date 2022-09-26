@@ -1,4 +1,3 @@
-import { Box } from '@mantine/core'
 import {
   Header as ShellHeader,
   MediaQuery,
@@ -31,15 +30,15 @@ export const Header = ({ opened, setOpened }) => {
             marginRight: '15px',
           }}
         >
-          <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-            <Burger
-              title='Open Navbar'
-              opened={opened}
-              onClick={() => setOpened(o => !o)}
-              size='sm'
-              mr='xs'
-            />
-          </MediaQuery>
+          {/* <MediaQuery largerThan='sm' styles={{ display: 'none' }}> */}
+          <Burger
+            title='Open Navbar'
+            opened={opened}
+            onClick={() => setOpened(o => !o)}
+            size='sm'
+            mr='xs'
+          />
+          {/* </MediaQuery> */}
 
           <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
             <g>
