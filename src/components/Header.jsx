@@ -100,19 +100,25 @@ export const Header = ({ opened, setOpened }) => {
             sx={{ width: '500%' }}
           />
 
-          {dark ? (
-            <ActionIcon variant='filled' size='lg'>
-              <IconSearch size={iconSize} color={'white'} />
-            </ActionIcon>
-          ) : (
-            <ActionIcon
-              variant='filled'
-              size='lg'
-              sx={{ backgroundColor: '#F0F0F0' }}
-            >
-              <IconSearch size={iconSize} color={'black'} />
-            </ActionIcon>
-          )}
+          <ActionIcon
+            variant='filled'
+            size='lg'
+            sx={theme => ({
+              backgroundColor:
+                theme.colorScheme == 'dark'
+                  ? theme.colors.dark[6]
+                  : theme.colors.gray[1],
+
+              '&:hover': {
+                backgroundColor:
+                  theme.colorScheme == 'dark'
+                    ? theme.black
+                    : theme.colors.gray[2],
+              },
+            })}
+          >
+            <IconSearch size={iconSize} color={dark ? 'white' : 'black'} />
+          </ActionIcon>
         </div>
 
         <ActionIcon

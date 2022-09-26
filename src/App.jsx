@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Header, Navbar } from './components'
 
 function App() {
-  const [opened, setOpened] = useState(false)
+  const [opened, setOpened] = useState(true)
 
   return (
     <AppShell
