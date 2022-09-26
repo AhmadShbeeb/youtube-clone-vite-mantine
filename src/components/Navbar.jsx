@@ -9,6 +9,7 @@ export const Navbar = ({ opened }) => {
       height={500}
       p='xs'
       width={{ sm: 300, lg: 400, base: 300 }}
+      sx={{ zIndex: '1' }}
     >
       <ShellNavbar.Section>
         {/* Header with logo */}

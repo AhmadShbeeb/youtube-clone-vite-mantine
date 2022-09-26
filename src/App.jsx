@@ -10,7 +10,9 @@ function App() {
       padding='md'
       header={<Header opened={opened} setOpened={setOpened} />}
       navbar={<Navbar opened={opened} />}
-    ></AppShell>
+    >
+      <p>123</p>
+    </AppShell>
   )
 }
 
