@@ -1,14 +1,18 @@
 import { Navbar as ShellNavbar, MediaQuery, ScrollArea } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconHome } from '@tabler/icons'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { NavbarLink } from '.'
 import { categories } from '../../utils/constants'
 
-export const Navbar = ({ opened, setOpened }) => {
+export const Navbar = ({
+  opened,
+  setOpened,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const minWidth = 200
   const matches = useMediaQuery(`(min-width: ${minWidth}px)`)
-  const [active, setActive] = useState('New')
 
   useEffect(() => {
     opened ? setOpened(o => !o) : null
@@ -37,8 +41,8 @@ export const Navbar = ({ opened, setOpened }) => {
             <NavbarLink
               {...category}
               key={category.label}
-              active={active}
-              setActive={setActive}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
             />
           ))}
         </ShellNavbar.Section>

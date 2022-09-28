@@ -4,7 +4,12 @@ import { UnstyledButton, Group, Text } from '@mantine/core'
 import { IconHome } from '@tabler/icons'
 import { Link } from 'react-router-dom'
 
-export const NavbarLink = ({ label, icon, setActive, active }) => {
+export const NavbarLink = ({
+  label,
+  icon,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const categoryIconSize = '24px'
 
   return (
@@ -36,16 +41,16 @@ export const NavbarLink = ({ label, icon, setActive, active }) => {
     <NavLink
       // description={item.description}
       // rightSection={item.rightSection}
-      active={label === active}
+      color='red'
+      variant='subtle'
+      active={label === selectedCategory}
+      onClick={() => setSelectedCategory(label)}
       label={label}
       icon={
         <div style={{ width: categoryIconSize, height: categoryIconSize }}>
           {icon}
         </div>
       }
-      onClick={() => setActive(label)}
-      color='red'
-      variant='subtle'
       sx={theme => ({
         color: theme.colorScheme == 'dark' ? theme.white : theme.black,
 
