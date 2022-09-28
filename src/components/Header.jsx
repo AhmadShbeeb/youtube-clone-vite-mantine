@@ -106,12 +106,22 @@ export const Header = ({ opened, setOpened }) => {
         >
           <Autocomplete
             placeholder='Search'
-            sx={{ width: '80%' }}
             // data={['React', 'Angular', 'Svelte', 'Vue']}
             value={query}
             onChange={setQuery}
             limit={5}
             data={queryResult}
+            sx={theme => ({
+              width: '80%',
+              input: {
+                '&:focus': {
+                  borderColor:
+                    theme.colorScheme == 'dark'
+                      ? theme.colors.red[9]
+                      : theme.colors.red[3],
+                },
+              },
+            })}
           />
 
           <ActionIcon
@@ -126,8 +136,8 @@ export const Header = ({ opened, setOpened }) => {
               '&:hover': {
                 backgroundColor:
                   theme.colorScheme == 'dark'
-                    ? theme.black
-                    : theme.colors.gray[2],
+                    ? theme.colors.red[9]
+                    : theme.colors.red[1],
               },
             })}
           >
