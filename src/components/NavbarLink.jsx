@@ -1,6 +1,5 @@
 import { NavLink } from '@mantine/core'
 import { Box } from '@mantine/core'
-import { UnstyledButton, Group, Text } from '@mantine/core'
 import { IconHome } from '@tabler/icons'
 import { Link } from 'react-router-dom'
 
@@ -52,11 +51,19 @@ export const NavbarLink = ({
         </div>
       }
       sx={theme => ({
-        color: theme.colorScheme == 'dark' ? theme.white : theme.black,
-
         '&:hover': {
           backgroundColor:
-            theme.colorScheme == 'dark' ? theme.black : theme.colors.gray[2],
+            // theme.colorScheme == 'dark' ? theme.black : theme.colors.gray[2],
+            theme.colorScheme == 'dark'
+              ? theme.colors.red[9]
+              : theme.colors.red[1],
+        },
+        '&[data-active]': {
+          // backgroundColor: theme.colors.blue[3],
+          color:
+            theme.colorScheme == 'dark'
+              ? theme.colors.red[6]
+              : theme.colors.red[6],
         },
       })}
     />
