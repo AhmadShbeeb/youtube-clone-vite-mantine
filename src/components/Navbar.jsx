@@ -1,4 +1,9 @@
-import { Navbar as ShellNavbar, MediaQuery, ScrollArea } from '@mantine/core'
+import {
+  Navbar as ShellNavbar,
+  MediaQuery,
+  ScrollArea,
+  Code,
+} from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconHome } from '@tabler/icons'
 import { useEffect } from 'react'
@@ -47,7 +52,11 @@ export const Navbar = ({
           ))}
         </ShellNavbar.Section>
 
-        <ShellNavbar.Section>Ahmad Shbeeb</ShellNavbar.Section>
+        <ShellNavbar.Section>
+          <Code color='red' sx={{ fontSize: '10px' }}>
+            Copyright &copy; 2022 Ahmad Shbeeb
+          </Code>
+        </ShellNavbar.Section>
       </ShellNavbar>
     )
   )
