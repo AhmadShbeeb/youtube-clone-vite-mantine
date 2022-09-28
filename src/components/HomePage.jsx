@@ -2,6 +2,7 @@ import { AppShell, MediaQuery, Burger, Image, Title } from '@mantine/core'
 import { useState, useEffect } from 'react'
 import { Header, Navbar } from '.'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
+import { Videos } from '.'
 
 export const HomePage = () => {
   const [opened, setOpened] = useState(false)
@@ -11,9 +12,9 @@ export const HomePage = () => {
   useEffect(() => {
     setVideos(null)
 
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
-      setVideos(data.items)
-    )
+    // fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
+    //   setVideos(data.items)
+    // )
   }, [selectedCategory])
 
   return (
@@ -29,12 +30,12 @@ export const HomePage = () => {
         />
       }
     >
-      <Title order={4} color='dimmed' italic>
+      <Title order={3} color='dimmed' italic>
         {selectedCategory}
         <span style={{ color: '#ff0000' }}> videos</span>
       </Title>
 
-      {/* <Videos videos={videos}/> */}
+      <Videos videos={videos} />
     </AppShell>
   )
 }

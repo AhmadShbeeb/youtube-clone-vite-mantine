@@ -48,9 +48,8 @@ export const Header = ({ opened, setOpened }) => {
             mr='xs'
           />
           {/* </MediaQuery> */}
-
-          <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
-            <Link to='/'>
+          <Link to='/' style={{ display: 'flex' }}>
+            <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
               <g>
                 <g>
                   <path
@@ -95,8 +94,8 @@ export const Header = ({ opened, setOpened }) => {
                   </g>
                 </g>
               </g>
-            </Link>
-          </svg>
+            </svg>
+          </Link>
         </div>
 
         <div
