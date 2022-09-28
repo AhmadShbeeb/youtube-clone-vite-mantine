@@ -14,7 +14,7 @@ import {
 
 export const categories = [
   {
-    label: 'Home',
+    label: 'New',
     icon: <IconHome style={{ width: 'inherit', height: 'inherit' }} />,
   },
   {
