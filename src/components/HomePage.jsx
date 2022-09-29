@@ -2,7 +2,7 @@ import { AppShell, MediaQuery, Burger, Image, Title } from '@mantine/core'
 import { useState, useEffect } from 'react'
 import { Header, Navbar } from '.'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
-import { Videos } from '.'
+import { Videos, Drawer } from '.'
 
 import { apiTest } from '../../utils/constants'
 
@@ -25,7 +25,7 @@ export const HomePage = () => {
       padding='md'
       header={<Header opened={opened} setOpened={setOpened} />}
       navbar={
-        <Navbar
+        <Drawer
           opened={opened}
           setOpened={setOpened}
           selectedCategory={selectedCategory}
