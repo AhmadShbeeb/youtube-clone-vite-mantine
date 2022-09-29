@@ -15,20 +15,9 @@ export const VideoCard = ({
     <Card
       shadow='md'
       p='xs'
-      // m={40}
       radius='md'
       withBorder
       sx={{ height: 300, maxWidth: 320, minWidth: 20 }}
-      // sx={{ xs: '100%', sm: '358px', md: '320px' }}
-      // sx={
-      // {
-      // width: '320px',
-      // height: '300px',
-      // display: 'flex',
-      // alignItems: 'center',
-      // justifyContent: 'center',
-      //   }
-      // }
     >
       <Card.Section component={Link} to={`/video/${videoId}`}>
         <Image
