@@ -17,7 +17,8 @@ export const Navbar = ({
   setSelectedCategory,
 }) => {
   const minWidth = 200
-  const matches = useMediaQuery(`(min-width: ${minWidth}px)`)
+  const openedWidth = 450
+  const matches = useMediaQuery(`(min-width: ${openedWidth}px)`)
 
   useEffect(() => {
     opened ? setOpened(o => !o) : null
