@@ -7,8 +7,8 @@ function App() {
       {/* <Routes>: routes to the FIRST matched path */}
       <Routes>
         <Route path='/' exact element={<HomePage />} />
-        <Route path='/video/:id' element={<VideoDetails />} />
-        <Route path='/channel/:id' element={<ChannelDetails />} />
+        <Route path='/video/:videoId' element={<VideoDetails />} />
+        <Route path='/channel/:channelId' element={<ChannelDetails />} />
         {/* <Route path='/search/:searchTerm' exact element={<SearchFeed />} /> */}
       </Routes>
     </BrowserRouter>

@@ -1,24 +1,23 @@
 import { AppShell, MediaQuery, Burger, Image, Title } from '@mantine/core'
 import { useState, useEffect } from 'react'
-import { Header, Navbar } from '.'
+import { Videos, Header, Navbar } from '.'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
-import { Videos, Drawer } from '.'
 
 import { apiTest } from '../../utils/constants'
 
 export const HomePage = () => {
   const [opened, setOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('New')
-  // const [videos, setVideos] = useState(null)
-  const [videos, setVideos] = useState(apiTest)
+  const [videos, setVideos] = useState(null)
+  // const [videos, setVideos] = useState(apiTest)
   // console.log(videos)
 
-  // useEffect(() => {
-  //   setVideos(null)
-  //   fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
-  //     setVideos(data.items)
-  //   )
-  // }, [selectedCategory])
+  useEffect(() => {
+    setVideos(null)
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
+      setVideos(data.items)
+    )
+  }, [selectedCategory])
 
   return (
     <AppShell

@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom'
+
 export const VideoDetails = () => {
-  return <div>VideoDetails</div>
+  const { videoId } = useParams()
+
+  return <div> {videoId}</div>
 }

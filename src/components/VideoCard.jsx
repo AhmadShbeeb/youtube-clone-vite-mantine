@@ -1,8 +1,4 @@
-import { Tooltip } from '@mantine/core'
-import { Card, Image, Group, Text, Spoiler, Stack } from '@mantine/core'
-import { useElementSize } from '@mantine/hooks'
-import { useResizeObserver } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { Card, Image, Text, Tooltip, AspectRatio, Stack } from '@mantine/core'
 import { Link } from 'react-router-dom'
 
 export const VideoCard = ({
@@ -17,17 +13,22 @@ export const VideoCard = ({
       p='xs'
       radius='md'
       withBorder
-      sx={{ height: 300, maxWidth: 320, minWidth: 20 }}
+      sx={{ height: 300, maxWidth: 320 }}
     >
       <Card.Section component={Link} to={`/video/${videoId}`}>
-        <Image
-          src={`${snippet?.thumbnails?.high?.url}`}
-          height={180}
-          width={320}
-          // fit='contain'
-          alt='Loading...'
-          withPlaceholder
-        />
+        <AspectRatio
+          ratio={320 / 180}
+          // sx={{ maxWidth: 320, maxHeight: 180 }}
+          // mx='auto'
+          // my='auto'
+        >
+          <Image
+            src={`${snippet?.thumbnails?.high?.url}`}
+            // fit='scale-down'
+            // alt='Loading...'
+            withPlaceholder
+          />
+        </AspectRatio>
       </Card.Section>
 
       <Stack align='flex-start' spacing='lg' style={{ position: 'relative' }}>

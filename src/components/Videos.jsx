@@ -1,4 +1,4 @@
-import { Grid, Loader } from '@mantine/core'
+import { SimpleGrid, Loader } from '@mantine/core'
 import { VideoCard } from '.'
 
 export const Videos = ({ videos }) => {
@@ -16,15 +16,19 @@ export const Videos = ({ videos }) => {
     )
 
   return (
-    <Grid justify='flex-start' align='stretch' columns={12}>
+    <SimpleGrid
+      cols={4}
+      spacing='md'
+      breakpoints={[
+        { maxWidth: 'md', cols: 3, spacing: 'md' },
+        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+      ]}
+    >
       {videos?.map(
         (video, idx) =>
-          video.id.videoId && (
-            <Grid.Col key={idx} xs={4} lg={3}>
-              <VideoCard key={video.id.videoId} video={video} />
-            </Grid.Col>
-          )
+          video.id.videoId && <VideoCard key={video.id.videoId} video={video} />
       )}
-    </Grid>
+    </SimpleGrid>
   )
 }
