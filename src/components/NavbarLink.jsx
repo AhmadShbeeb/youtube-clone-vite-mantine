@@ -1,7 +1,4 @@
 import { NavLink } from '@mantine/core'
-import { Box } from '@mantine/core'
-import { IconHome } from '@tabler/icons'
-import { Link } from 'react-router-dom'
 
 export const NavbarLink = ({
   label,

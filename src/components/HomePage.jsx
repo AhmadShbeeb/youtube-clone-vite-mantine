@@ -4,18 +4,22 @@ import { Header, Navbar } from '.'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
 import { Videos } from '.'
 
+import { apiTest } from '../../utils/constants'
+
 export const HomePage = () => {
   const [opened, setOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('New')
-  const [videos, setVideos] = useState(null)
+  const [videos, setVideos] = useState(apiTest)
+  console.log(videos)
 
-  useEffect(() => {
-    setVideos(null)
-
-    // fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
-    //   setVideos(data.items)
-    // )
-  }, [selectedCategory])
+  //   useEffect(() => {
+  //     // setVideos(null)
+  // ]
+  //     // fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
+  //     //   setVideos(data.items)
+  //     // )
+  //     // console.log(videos)
+  //   }, [selectedCategory])
 
   return (
     <AppShell
@@ -30,7 +34,7 @@ export const HomePage = () => {
         />
       }
     >
-      <Title order={3} color='dimmed' italic>
+      <Title order={3} color='dimmed' italic mb={12}>
         {selectedCategory}
         <span style={{ color: '#ff0000' }}> videos</span>
       </Title>
