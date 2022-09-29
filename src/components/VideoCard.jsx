@@ -30,20 +30,7 @@ export const VideoCard = ({
       //   }
       // }
     >
-      <Card.Section
-        component={Link}
-        to={`/video/${videoId}`}
-        // inheritPadding
-        // sx={
-        // {
-        // width: { md: '320px' },
-        //   display: 'flex',
-        //   alignItems: 'start',
-        //   justifyContent: 'flex-start',
-        // }
-        // }
-        // sx={{ maxHeight: '100' }}
-      >
+      <Card.Section component={Link} to={`/video/${videoId}`}>
         <Image
           src={`${snippet?.thumbnails?.high?.url}`}
           height={180}
@@ -54,27 +41,26 @@ export const VideoCard = ({
         />
       </Card.Section>
 
-      <Stack align='flex-start' spacing='lg'>
-        <Spoiler mt='sm' maxHeight={30} showLabel='...'>
-          <Tooltip multiline label={`${snippet?.title} `}>
-            <Text
-              size='md'
-              weight={600}
-              component={Link}
-              to={`/video/${videoId}`}
-            >
-              {`${snippet?.title} `}
-            </Text>
-          </Tooltip>
-        </Spoiler>
+      <Stack align='flex-start' spacing='lg' style={{ position: 'relative' }}>
+        <Tooltip multiline label={`${snippet?.title} `}>
+          <Text
+            size='md'
+            mt='xs'
+            weight={600}
+            component={Link}
+            lineClamp={2}
+            to={`/video/${videoId}`}
+          >
+            {`${snippet?.title} `}
+          </Text>
+        </Tooltip>
 
         <Text
           size='sm'
           color='dimmed'
           component={Link}
           to={`/channel/${snippet?.channelId}`}
-          // mb={20}
-          sx={{ bottom: '10px' }}
+          style={{ position: 'absolute', top: '80px' }}
         >
           {`${snippet?.channelTitle}`}
         </Text>
