@@ -25,7 +25,7 @@ export const HomePage = () => {
       padding='md'
       header={<Header opened={opened} setOpened={setOpened} />}
       navbar={
-        <Drawer
+        <Navbar
           opened={opened}
           setOpened={setOpened}
           selectedCategory={selectedCategory}

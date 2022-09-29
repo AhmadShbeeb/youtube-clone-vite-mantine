@@ -5,7 +5,6 @@ export const NavbarLink = ({
   icon,
   selectedCategory,
   setSelectedCategory,
-  setOpened,
 }) => {
   const categoryIconSize = '24px'
 
@@ -43,7 +42,6 @@ export const NavbarLink = ({
       active={label === selectedCategory}
       onClick={() => {
         setSelectedCategory(label)
-        setOpened(false)
       }}
       label={label}
       icon={

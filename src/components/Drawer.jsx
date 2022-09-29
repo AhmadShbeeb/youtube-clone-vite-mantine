@@ -21,7 +21,6 @@ export const Drawer = ({
       size='xs'
     >
       <Stack align='start' spacing='xs' style={{ position: 'relative' }}>
-        {/* <ScrollArea style={{ height: 350 }}> */}
         {categories.map(category => (
           <NavbarLink
             {...category}
@@ -31,7 +30,6 @@ export const Drawer = ({
             setOpened={setOpened}
           />
         ))}
-        {/* </ScrollArea> */}
 
         <Code
           color='red'
