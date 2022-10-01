@@ -1,7 +1,8 @@
 import { SimpleGrid, Loader } from '@mantine/core'
 import { VideoCard } from '.'
+import { memo } from 'react'
 
-export const Videos = ({ videos }) => {
+export const Videos = memo(({ videos }) => {
   if (!videos?.length)
     return (
       <div
@@ -31,4 +32,4 @@ export const Videos = ({ videos }) => {
       )}
     </SimpleGrid>
   )
-}
+})

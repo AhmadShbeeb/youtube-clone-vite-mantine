@@ -30,6 +30,7 @@ export const Navbar = ({
         // hiddenBreakpoint='sm'
         // hidden={!opened}
         // height={600}
+        // style={opened ? { display: 'flex' } : { display: 'none' }}
         p='xs'
         width={{ base: minWidth }}
         sx={{ zIndex: '1' }}

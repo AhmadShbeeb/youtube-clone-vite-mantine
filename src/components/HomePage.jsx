@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Videos, Header, Navbar } from '.'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
 
-import { apiTest } from '../../utils/constants'
+// import { apiTest } from '../../utils/constants'
 
 export const HomePage = () => {
   const [opened, setOpened] = useState(false)
@@ -36,7 +36,6 @@ export const HomePage = () => {
         {selectedCategory}
         <span style={{ color: '#ff0000' }}> videos</span>
       </Title>
-
       <Videos videos={videos} />
     </AppShell>
   )
