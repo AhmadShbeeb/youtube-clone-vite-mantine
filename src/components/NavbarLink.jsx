@@ -12,7 +12,7 @@ export const NavbarLink = ({
   const categoryIconSize = '24px'
   const navigate = useNavigate()
   const match = useMatch('/')
-  const isHome = match ? true : false
+  const isHomePage = match ? true : false
 
   return (
     // <UnstyledButton
@@ -47,7 +47,7 @@ export const NavbarLink = ({
       variant='subtle'
       active={label === selectedCategory}
       onClick={() => {
-        if (!isHome) {
+        if (!isHomePage) {
           setVideos(null)
           navigate('/')
         }

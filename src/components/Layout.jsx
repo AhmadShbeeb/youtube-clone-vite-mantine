@@ -6,7 +6,7 @@ import { fetchFromAPI } from '../../utils/fetchFromAPI'
 
 // import { apiTest } from '../../utils/constants'
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   const [opened, setOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('New')
   const [videos, setVideos] = useState(null)
@@ -34,7 +34,7 @@ export const Layout = ({ children }) => {
         />
       }
     >
-      <Outlet context={{ selectedCategory, videos }} />
+      <Outlet context={{ selectedCategory, videos, setVideos }} />
     </AppShell>
   )
 }
