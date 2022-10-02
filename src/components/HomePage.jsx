@@ -1,42 +1,17 @@
-import { AppShell, MediaQuery, Burger, Image, Title } from '@mantine/core'
-import { useState, useEffect } from 'react'
-import { Videos, Header, Navbar } from '.'
-import { fetchFromAPI } from '../../utils/fetchFromAPI'
-
-// import { apiTest } from '../../utils/constants'
+import { Title } from '@mantine/core'
+import { useOutletContext } from 'react-router-dom'
+import { Videos } from '.'
 
 export const HomePage = () => {
-  const [opened, setOpened] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState('New')
-  const [videos, setVideos] = useState(null)
-  // const [videos, setVideos] = useState(apiTest)
-  // console.log(videos)
-
-  useEffect(() => {
-    setVideos(null)
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
-      setVideos(data.items)
-    )
-  }, [selectedCategory])
-
+  const { selectedCategory, videos } = useOutletContext()
   return (
-    <AppShell
-      padding='md'
-      header={<Header opened={opened} setOpened={setOpened} />}
-      navbar={
-        <Navbar
-          opened={opened}
-          setOpened={setOpened}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      }
-    >
+    <>
       <Title order={3} color='dimmed' italic mb={12}>
         {selectedCategory}
         <span style={{ color: '#ff0000' }}> videos</span>
       </Title>
+
       <Videos videos={videos} />
-    </AppShell>
+    </>
   )
 }

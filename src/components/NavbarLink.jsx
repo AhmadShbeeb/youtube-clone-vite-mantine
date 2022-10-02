@@ -1,4 +1,6 @@
 import { NavLink } from '@mantine/core'
+import { useMatch } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export const NavbarLink = ({
   label,
@@ -7,7 +9,9 @@ export const NavbarLink = ({
   setSelectedCategory,
 }) => {
   const categoryIconSize = '24px'
-
+  const navigate = useNavigate()
+  const match = useMatch('/')
+  const isHome = match ? true : false
   return (
     // <UnstyledButton
     //   onClick={() => setActive(o => !o)}
@@ -41,6 +45,7 @@ export const NavbarLink = ({
       variant='subtle'
       active={label === selectedCategory}
       onClick={() => {
+        !isHome && navigate('/')
         setSelectedCategory(label)
       }}
       label={label}
