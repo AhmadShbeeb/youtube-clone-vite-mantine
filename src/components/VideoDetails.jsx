@@ -3,7 +3,7 @@ import { useParams, useOutletContext } from 'react-router-dom'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
 import { Videos } from '.'
 import ReactPlayer from 'react-player'
-import { AspectRatio } from '@mantine/core'
+import { AspectRatio, SimpleGrid } from '@mantine/core'
 
 export const VideoDetails = () => {
   const { videoId } = useParams()
@@ -11,24 +11,38 @@ export const VideoDetails = () => {
   const [videoDetails, setVideoDetails] = useState(null)
 
   useEffect(() => {
-    // setVideos(null)
+    setVideos(null)
     setVideoDetails(null)
-    fetchFromAPI(
-      `videos?part=contentDetails,snippet,statistics&id=${videoId}`
-    ).then(data => setVideoDetails(data.items[0]))
+
+    fetchFromAPI(`video/details/?id=${videoId}`).then(data =>
+      setVideoDetails(data)
+    )
+    fetchFromAPI(`video/related-contents/?id=${videoId}`).then(data => {
+      const uniqueVideos = [
+        ...new Map(data.contents.map(v => [v?.video?.videoId, v])).values(),
+      ]
+      setVideos(uniqueVideos)
+    })
 
     console.log(videoDetails)
-  }, [])
+  }, [videoId])
 
   return (
-    <div>
-      {/* <Videos /> */}
+    <SimpleGrid
+      cols={2}
+      spacing='md'
+      breakpoints={[
+        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+      ]}
+    >
       {/* <AspectRatio ratio={16 / 9}> */}
       <ReactPlayer
         url={`https://www.youtube.com/watch?v=${videoId}`}
         controls
       />
+      <Videos videos={videos} />
       {/* </AspectRatio> */}
-    </div>
+    </SimpleGrid>
   )
 }

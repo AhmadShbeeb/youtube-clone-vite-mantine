@@ -1,12 +1,8 @@
 import { Card, Image, Text, Tooltip, AspectRatio, Stack } from '@mantine/core'
 import { Link } from 'react-router-dom'
 
-export const VideoCard = ({
-  video: {
-    id: { videoId },
-    snippet,
-  },
-}) => {
+export const VideoCard = ({ video }) => {
+  console.log(video)
   return (
     <Card
       shadow='md'
@@ -15,7 +11,7 @@ export const VideoCard = ({
       withBorder
       sx={{ height: 300, maxWidth: 320 }}
     >
-      <Card.Section component={Link} to={`/video/${videoId}`}>
+      <Card.Section component={Link} to={`/video/${video.videoId}`}>
         <AspectRatio
           ratio={320 / 180}
           // sx={{ maxWidth: 320, maxHeight: 180 }}
@@ -23,7 +19,7 @@ export const VideoCard = ({
           // my='auto'
         >
           <Image
-            src={`${snippet?.thumbnails?.high?.url}`}
+            src={`${video?.thumbnails?.[0]?.url}`}
             // fit='scale-down'
             // alt='Loading...'
             withPlaceholder
@@ -32,16 +28,16 @@ export const VideoCard = ({
       </Card.Section>
 
       <Stack align='flex-start' spacing='lg' style={{ position: 'relative' }}>
-        <Tooltip multiline label={`${snippet?.title} `}>
+        <Tooltip multiline label={`${video?.title} `}>
           <Text
             size='md'
             mt='xs'
             weight={600}
             component={Link}
             lineClamp={2}
-            to={`/video/${videoId}`}
+            to={`/video/${video.videoId}`}
           >
-            {`${snippet?.title} `}
+            {`${video?.title} `}
           </Text>
         </Tooltip>
 
@@ -49,10 +45,10 @@ export const VideoCard = ({
           size='sm'
           color='dimmed'
           component={Link}
-          to={`/channel/${snippet?.channelId}`}
+          to={`/channel/${video?.author?.channelId}`}
           style={{ position: 'absolute', top: '80px' }}
         >
-          {`${snippet?.channelTitle}`}
+          {`${video?.author?.title}`}
         </Text>
       </Stack>
     </Card>

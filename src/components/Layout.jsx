@@ -15,9 +15,15 @@ export const Layout = () => {
 
   useEffect(() => {
     setVideos(null)
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
-      setVideos(data.items)
-    )
+    // fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(data =>
+    // setVideos(data.items)
+    // )
+    fetchFromAPI(`search/?q=${selectedCategory}`).then(data => {
+      const uniqueVideos = [
+        ...new Map(data.contents.map(v => [v.video.videoId, v])).values(),
+      ]
+      setVideos(uniqueVideos)
+    })
   }, [selectedCategory])
 
   return (
