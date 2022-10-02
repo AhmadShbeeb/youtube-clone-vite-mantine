@@ -7,11 +7,13 @@ export const NavbarLink = ({
   icon,
   selectedCategory,
   setSelectedCategory,
+  setVideos,
 }) => {
   const categoryIconSize = '24px'
   const navigate = useNavigate()
   const match = useMatch('/')
   const isHome = match ? true : false
+
   return (
     // <UnstyledButton
     //   onClick={() => setActive(o => !o)}
@@ -45,7 +47,10 @@ export const NavbarLink = ({
       variant='subtle'
       active={label === selectedCategory}
       onClick={() => {
-        !isHome && navigate('/')
+        if (!isHome) {
+          setVideos(null)
+          navigate('/')
+        }
         setSelectedCategory(label)
       }}
       label={label}

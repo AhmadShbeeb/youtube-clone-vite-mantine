@@ -15,6 +15,7 @@ export const Navbar = ({
   setOpened,
   selectedCategory,
   setSelectedCategory,
+  setVideos,
 }) => {
   const minWidth = 200
   const openedWidth = 450
@@ -50,6 +51,7 @@ export const Navbar = ({
               key={category.label}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
+              setVideos={setVideos}
             />
           ))}
         </ShellNavbar.Section>

@@ -30,6 +30,7 @@ export const Layout = ({ children }) => {
           setOpened={setOpened}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          setVideos={setVideos}
         />
       }
     >

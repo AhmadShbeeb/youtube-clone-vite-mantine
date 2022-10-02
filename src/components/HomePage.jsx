@@ -8,7 +8,7 @@ export const HomePage = () => {
     <>
       <Title order={3} color='dimmed' italic mb={12}>
         {selectedCategory}
-        <span style={{ color: '#ff0000' }}> videos</span>
+        <span style={{ color: '#ff0000' }}> Videos</span>
       </Title>
 
       <Videos videos={videos} />
