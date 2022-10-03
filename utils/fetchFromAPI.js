@@ -12,10 +12,11 @@ const options = {
     // 'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
     'X-RapidAPI-Host': 'youtube138.p.rapidapi.com',
   },
+  // signal,
 }
 
-export const fetchFromAPI = async url => {
-  const { data } = await axios.get(`${BASE_URL}/${url}`, options)
+export const fetchFromAPI = async (url, signal) => {
+  const { data } = await axios.get(`${BASE_URL}/${url}`, { ...options, signal })
 
   return data
 }

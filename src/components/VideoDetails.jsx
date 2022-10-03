@@ -24,7 +24,7 @@ export const VideoDetails = () => {
       setVideos(uniqueVideos)
     })
 
-    console.log(videoDetails)
+    // console.log(videoDetails)
   }, [videoId])
 
   return (

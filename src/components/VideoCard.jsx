@@ -2,7 +2,7 @@ import { Card, Image, Text, Tooltip, AspectRatio, Stack } from '@mantine/core'
 import { Link } from 'react-router-dom'
 
 export const VideoCard = ({ video }) => {
-  console.log(video)
+  // console.log(video)
   return (
     <Card
       shadow='md'

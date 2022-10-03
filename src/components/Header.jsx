@@ -9,13 +9,16 @@ import {
 } from '@mantine/core'
 import { IconSun, IconMoonStars, IconSearch } from '@tabler/icons'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useMatch } from 'react-router-dom'
 
-export const Header = ({ opened, setOpened }) => {
+export const Header = ({ opened, setOpened, setTriggerRefetch, setVideos }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const iconSize = 18
   const [query, setQuery] = useState('')
+
+  const match = useMatch('/')
+  const isHomePage = match ? true : false
 
   //use React Query to fetch queryResult from api
   const queryResult = []
@@ -48,7 +51,16 @@ export const Header = ({ opened, setOpened }) => {
             mr='xs'
           />
           {/* </MediaQuery> */}
-          <Link to='/' style={{ display: 'flex' }}>
+          <Link
+            to='/'
+            style={{ display: 'flex' }}
+            onClick={() => {
+              if (!isHomePage) {
+                setVideos(null)
+                setTriggerRefetch(r => !r)
+              }
+            }}
+          >
             <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
               <g>
                 <g>

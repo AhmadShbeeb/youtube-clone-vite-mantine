@@ -25,8 +25,8 @@ export const Videos = memo(({ videos }) => {
       cols={isVideoPage ? 1 : 4}
       spacing='md'
       breakpoints={[
-        { maxWidth: 'md', cols: 3, spacing: 'md' },
-        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        // { maxWidth: 'md', cols: 3, spacing: 'md' },
+        // { maxWidth: 'sm', cols: 2, spacing: 'sm' },
         { maxWidth: 'xs', cols: 1, spacing: 'sm' },
       ]}
     >
