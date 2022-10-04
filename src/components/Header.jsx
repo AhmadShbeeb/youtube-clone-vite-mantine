@@ -1,4 +1,3 @@
-import { Box } from '@mantine/core'
 import {
   Header as ShellHeader,
   MediaQuery,
@@ -6,24 +5,41 @@ import {
   ActionIcon,
   useMantineColorScheme,
   Autocomplete,
+  Box,
 } from '@mantine/core'
 import { IconSun, IconMoonStars, IconSearch } from '@tabler/icons'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Link, useMatch } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { fetchFromAPI } from '../../utils/fetchFromAPI'
 
 export const Header = ({
   opened,
   setOpened,
-  // setTriggerRefetch,
-  // , setVideos
+  // selectedCategory,
+  // setSelectedCategory,
 }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const iconSize = 18
-  const [query, setQuery] = useState('')
 
-  const match = useMatch('/')
-  const isHomePage = match ? true : false
+  const navigate = useNavigate()
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const searchVideos = useQuery(
+    ['searchVideos'],
+    async ({ signal }) => await fetchFromAPI(`search/?q=${searchTerm}`, signal),
+    { enabled: false }
+  )
+
+  const fetchSearchQuery = e => {
+    e.preventDefault()
+    if (searchTerm) {
+      navigate(`/search/${searchTerm}`)
+      searchVideos?.refetch()
+      setSearchTerm('')
+    }
+  }
 
   //use React Query to fetch queryResult from api
   const queryResult = []
@@ -42,8 +58,6 @@ export const Header = ({
           style={{
             display: 'flex',
             height: '50%',
-            // flex: '0',
-            // justifyContent: 'space-between',
             marginRight: '15px',
           }}
         >
@@ -56,16 +70,7 @@ export const Header = ({
             mr='xs'
           />
           {/* </MediaQuery> */}
-          <Link
-            to='/'
-            style={{ display: 'flex' }}
-            // onClick={() => {
-            //   if (!isHomePage) {
-            //     setVideos(null)
-            //     setTriggerRefetch(r => !r)
-            //   }
-            // }}
-          >
+          <Link to='/' style={{ display: 'flex' }}>
             <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
               <g>
                 <g>
@@ -115,19 +120,21 @@ export const Header = ({
           </Link>
         </div>
 
-        <div
+        <Box
+          component='form'
+          onSubmit={fetchSearchQuery}
           style={{
             display: 'flex',
             flexBasis: '500px',
           }}
         >
           <Autocomplete
-            placeholder='Search'
             // data={['React', 'Angular', 'Svelte', 'Vue']}
-            value={query}
-            onChange={setQuery}
-            limit={5}
             data={queryResult}
+            placeholder='Search'
+            value={searchTerm}
+            onChange={setSearchTerm}
+            limit={5}
             sx={theme => ({
               width: '80%',
               input: {
@@ -144,6 +151,10 @@ export const Header = ({
           <ActionIcon
             variant='filled'
             size='lg'
+            type='submit'
+            // onClick={fetchSearchQuery}
+            // component={Link}
+            // to={`/search/${query}`}
             sx={theme => ({
               backgroundColor:
                 theme.colorScheme == 'dark'
@@ -160,7 +171,7 @@ export const Header = ({
           >
             <IconSearch size={iconSize} color={dark ? 'white' : 'black'} />
           </ActionIcon>
-        </div>
+        </Box>
 
         <ActionIcon
           variant='outline'

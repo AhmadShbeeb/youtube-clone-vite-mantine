@@ -2,7 +2,7 @@ import { Title } from '@mantine/core'
 import { useOutletContext } from 'react-router-dom'
 import { Videos } from '.'
 
-export const HomePage = () => {
+export const Feed = () => {
   const { selectedCategory, videos } = useOutletContext()
   return (
     <>

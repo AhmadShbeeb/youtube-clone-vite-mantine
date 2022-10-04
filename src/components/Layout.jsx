@@ -36,6 +36,8 @@ export const Layout = () => {
         <Header
           opened={opened}
           setOpened={setOpened}
+          selectedCategory={selectedCategory}
+          // setSelectedCategory={setSelectedCategory}
           // setVideos={setVideos}
           // setTriggerRefetch={setTriggerRefetch}
         />

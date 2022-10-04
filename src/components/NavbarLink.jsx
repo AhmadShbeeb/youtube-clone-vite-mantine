@@ -7,12 +7,11 @@ export const NavbarLink = ({
   icon,
   selectedCategory,
   setSelectedCategory,
-  // setVideos,
 }) => {
   const categoryIconSize = '24px'
   const navigate = useNavigate()
   const match = useMatch('/')
-  const isHomePage = match ? true : false
+  const isFeed = match ? true : false
 
   return (
     // <UnstyledButton
@@ -47,8 +46,7 @@ export const NavbarLink = ({
       variant='subtle'
       active={label === selectedCategory}
       onClick={() => {
-        if (!isHomePage) {
-          // setVideos(null)
+        if (!isFeed) {
           navigate('/')
         }
         setSelectedCategory(label)
@@ -62,13 +60,11 @@ export const NavbarLink = ({
       sx={theme => ({
         '&:hover': {
           backgroundColor:
-            // theme.colorScheme == 'dark' ? theme.black : theme.colors.gray[2],
             theme.colorScheme == 'dark'
               ? theme.colors.red[9]
               : theme.colors.red[1],
         },
         '&[data-active]': {
-          // backgroundColor: theme.colors.blue[3],
           color:
             theme.colorScheme == 'dark'
               ? theme.colors.red[6]

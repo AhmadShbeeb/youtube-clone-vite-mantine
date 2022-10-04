@@ -11,7 +11,6 @@ export const AppConfig = () => {
   const toggleColorScheme = value =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
 
-  const twentyFourHoursInMs = 1000 * 60 * 60 * 24
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -19,7 +18,7 @@ export const AppConfig = () => {
         refetchOnmount: false,
         refetchOnReconnect: false,
         retry: false,
-        staleTime: twentyFourHoursInMs,
+        staleTime: Infinity,
       },
     },
   })

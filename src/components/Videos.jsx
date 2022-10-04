@@ -10,7 +10,8 @@ export const Videos = memo(({ videos }) => {
   const isVideoPage = match ? true : false
 
   // if (videos?.isLoading || videos?.isFetching || videos?.isRefetching)
-  if (!videos?.data?.length)
+  // if (!videos?.data?.length)
+  if (videos?.isFetching)
     return (
       <div
         style={{
