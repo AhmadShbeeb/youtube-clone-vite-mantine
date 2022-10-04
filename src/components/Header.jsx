@@ -8,41 +8,44 @@ import {
   Box,
 } from '@mantine/core'
 import { IconSun, IconMoonStars, IconSearch } from '@tabler/icons'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDebounce } from 'use-debounce'
 import { fetchFromAPI } from '../../utils/fetchFromAPI'
 
-export const Header = ({
-  opened,
-  setOpened,
-  // selectedCategory,
-  // setSelectedCategory,
-}) => {
+export const Header = ({ opened, setOpened }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const iconSize = 18
 
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500)
+  const queryClient = useQueryClient()
 
-  const searchVideos = useQuery(
-    ['searchVideos'],
-    async ({ signal }) => await fetchFromAPI(`search/?q=${searchTerm}`, signal),
-    { enabled: false }
+  const { data: autoCompleteData } = useQuery(
+    ['autoCompleteData', debouncedSearchTerm],
+    async ({ signal }) =>
+      await fetchFromAPI(`auto-complete/?q=${debouncedSearchTerm}`, signal),
+    {
+      enabled: !!debouncedSearchTerm,
+      keepPreviousData: true,
+      // staleTime: 0,
+      // initialData: [],
+      // onSuccess: data => setQueryResult(data),
+    }
   )
 
   const fetchSearchQuery = e => {
     e.preventDefault()
     if (searchTerm) {
       navigate(`/search/${searchTerm}`)
-      searchVideos?.refetch()
       setSearchTerm('')
+      queryClient.setQueryData(['autoCompleteData', debouncedSearchTerm], [])
+      queryClient.removeQueries('autoCompleteData')
     }
   }
-
-  //use React Query to fetch queryResult from api
-  const queryResult = []
 
   return (
     <ShellHeader height={70} p='xs'>
@@ -129,11 +132,10 @@ export const Header = ({
           }}
         >
           <Autocomplete
-            // data={['React', 'Angular', 'Svelte', 'Vue']}
-            data={queryResult}
             placeholder='Search'
             value={searchTerm}
             onChange={setSearchTerm}
+            data={autoCompleteData || []}
             limit={5}
             sx={theme => ({
               width: '80%',

@@ -15,6 +15,7 @@ specifiers:
   react-dom: ^18.2.0
   react-player: ^2.11.0
   react-router-dom: '6'
+  use-debounce: ^8.0.4
   vite: ^3.1.0
 
 dependencies:
@@ -29,6 +30,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-player: 2.11.0_react@18.2.0
   react-router-dom: 6.4.1_biqbaboplfbrettd7655fr4n2y
+  use-debounce: 8.0.4_react@18.2.0
 
 devDependencies:
   '@types/react': 18.0.21
@@ -1465,6 +1467,15 @@ packages:
     resolution: {integrity: sha512-GLMG0Jc/jiKov/3Ulid1wbv3r54K9HlMW29IWcDFPEqFkSO2nS0MuefWgMJpeHQ9YJeXDL3ZUF+P3jdXlZX/cQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /use-debounce/8.0.4_react@18.2.0:
+    resolution: {integrity: sha512-fGqsYQzl8kLHF2QpQSgIwgOgJmnh6j5L6SIzQiHdLfwp3q1egUL3btq5Bg2SJysH6A0ILLgT2IqXZKoNJr0nFw==}
+    engines: {node: '>= 10.0.0'}
+    peerDependencies:
+      react: '>=16.8.0'
     dependencies:
       react: 18.2.0
     dev: false
