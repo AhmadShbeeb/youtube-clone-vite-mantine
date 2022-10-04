@@ -11,7 +11,12 @@ import { IconSun, IconMoonStars, IconSearch } from '@tabler/icons'
 import { useState } from 'react'
 import { Link, useMatch } from 'react-router-dom'
 
-export const Header = ({ opened, setOpened, setTriggerRefetch, setVideos }) => {
+export const Header = ({
+  opened,
+  setOpened,
+  // setTriggerRefetch,
+  // , setVideos
+}) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const iconSize = 18
@@ -54,12 +59,12 @@ export const Header = ({ opened, setOpened, setTriggerRefetch, setVideos }) => {
           <Link
             to='/'
             style={{ display: 'flex' }}
-            onClick={() => {
-              if (!isHomePage) {
-                setVideos(null)
-                setTriggerRefetch(r => !r)
-              }
-            }}
+            // onClick={() => {
+            //   if (!isHomePage) {
+            //     setVideos(null)
+            //     setTriggerRefetch(r => !r)
+            //   }
+            // }}
           >
             <svg viewBox='0 0 90 20' preserveAspectRatio='xMidYMid meet'>
               <g>

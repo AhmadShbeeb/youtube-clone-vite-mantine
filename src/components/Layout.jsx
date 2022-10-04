@@ -12,19 +12,15 @@ export const Layout = () => {
   const [opened, setOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('New')
   // const [videos, setVideos] = useState(null)
-  const [triggerRefetch, setTriggerRefetch] = useState(false)
+  // const [triggerRefetch, setTriggerRefetch] = useState(false)
   // const [videos, setVideos] = useState(apiTest)
-  // console.log(videos)
 
   // const { data, isLoading, error, refetch } = useQuery(
-  const videos = useQuery(['videos'], async ({ signal }) => {
-    const data = await fetchFromAPI(`search/?q=${selectedCategory}`, signal)
-    const uniqueVideos = [
-      ...new Map(data.contents.map(v => [v.video.videoId, v])).values(),
-    ]
-    return uniqueVideos
-  })
-  console.log(videos)
+  const videos = useQuery(
+    ['videos', selectedCategory],
+    async ({ signal }) =>
+      await fetchFromAPI(`search/?q=${selectedCategory}`, signal)
+  )
 
   // useEffect(() => {
   //   setVideos(null)
@@ -40,8 +36,8 @@ export const Layout = () => {
         <Header
           opened={opened}
           setOpened={setOpened}
-          setVideos={setVideos}
-          setTriggerRefetch={setTriggerRefetch}
+          // setVideos={setVideos}
+          // setTriggerRefetch={setTriggerRefetch}
         />
       }
       navbar={
@@ -50,11 +46,17 @@ export const Layout = () => {
           setOpened={setOpened}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
-          setVideos={setVideos}
+          // setVideos={setVideos}
         />
       }
     >
-      <Outlet context={{ selectedCategory, videos, setVideos }} />
+      <Outlet
+        context={{
+          selectedCategory,
+          videos,
+          //  setVideos
+        }}
+      />
     </AppShell>
   )
 }

@@ -7,7 +7,7 @@ export const NavbarLink = ({
   icon,
   selectedCategory,
   setSelectedCategory,
-  setVideos,
+  // setVideos,
 }) => {
   const categoryIconSize = '24px'
   const navigate = useNavigate()
@@ -48,7 +48,7 @@ export const NavbarLink = ({
       active={label === selectedCategory}
       onClick={() => {
         if (!isHomePage) {
-          setVideos(null)
+          // setVideos(null)
           navigate('/')
         }
         setSelectedCategory(label)

@@ -17,6 +17,9 @@ const options = {
 
 export const fetchFromAPI = async (url, signal) => {
   const { data } = await axios.get(`${BASE_URL}/${url}`, { ...options, signal })
+  const uniqueVideos = [
+    ...new Map(data?.contents?.map(v => [v?.video?.videoId, v])).values(),
+  ]
 
-  return data
+  return uniqueVideos
 }

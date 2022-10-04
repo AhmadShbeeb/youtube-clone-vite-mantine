@@ -10,7 +10,19 @@ export const AppConfig = () => {
   const [colorScheme, setColorScheme] = useState('light')
   const toggleColorScheme = value =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-  const queryClient = new QueryClient()
+
+  const twentyFourHoursInMs = 1000 * 60 * 60 * 24
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnmount: false,
+        refetchOnReconnect: false,
+        retry: false,
+        staleTime: twentyFourHoursInMs,
+      },
+    },
+  })
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
