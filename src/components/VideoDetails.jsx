@@ -5,6 +5,10 @@ import { Videos } from '.'
 import ReactPlayer from 'react-player'
 import { AspectRatio, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
+import { Box } from '@mantine/core'
+import { ScrollArea } from '@mantine/core'
+import { Paper } from '@mantine/core'
+import { Skeleton } from '@mantine/core'
 
 export const VideoDetails = () => {
   const { videoId } = useParams()
@@ -44,20 +48,37 @@ export const VideoDetails = () => {
 
   return (
     <SimpleGrid
-      cols={2}
+      cols={4}
       spacing='md'
-      breakpoints={[
-        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
-        // { maxWidth: 'xs', cols: 1, spacing: 'sm' },
-      ]}
+      breakpoints={[{ maxWidth: 'lg', cols: 1, spacing: 'sm' }]}
     >
-      {/* <AspectRatio ratio={16 / 9}> */}
-      <ReactPlayer
-        url={`https://www.youtube.com/watch?v=${videoId}`}
-        controls
-      />
-      <Videos videos={relatedVideos} />
-      {/* </AspectRatio> */}
+      <Box sx={{ gridColumn: '1/4' }}>
+        {/* <Skeleton visible={loading}> */}
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${videoId}`}
+          controls
+          width='900px'
+          height='480px'
+        />
+        {/* </Skeleton> */}
+      </Box>
+
+      <Paper
+        shadow='xl'
+        radius='lg'
+        p='xs'
+        withBorder
+        component={ScrollArea}
+        scrollHideDelay={500}
+        sx={{
+          maxWidth: '25vw',
+          height: '80vh',
+          display: 'flex',
+          position: 'relative',
+        }}
+      >
+        <Videos videos={relatedVideos} />
+      </Paper>
     </SimpleGrid>
   )
 }

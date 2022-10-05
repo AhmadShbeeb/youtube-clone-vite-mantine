@@ -15,9 +15,15 @@ export const Videos = memo(({ videos }) => {
     return (
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center', //align vertical
-          justifyContent: 'center', //align horizontal
+          // display: 'flex',
+          // alignItems: 'center', //align vertical
+          // justifyContent: 'center', //align horizontal
+          // minHeight: '100%',
+          // minWidth: '100%',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
         }}
       >
         <Loader color='red' variant='bars' size='xl' />
@@ -27,12 +33,17 @@ export const Videos = memo(({ videos }) => {
   return (
     <SimpleGrid
       cols={isVideoPage ? 1 : 4}
+      // sx={isVideoPage && { justifySelf: 'end' }}
       spacing='md'
-      breakpoints={[
-        { maxWidth: 'md', cols: 3, spacing: 'md' },
-        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
-        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
-      ]}
+      breakpoints={
+        !isVideoPage
+          ? [
+              { maxWidth: 'md', cols: 3, spacing: 'md' },
+              { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+              { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+            ]
+          : []
+      }
     >
       {videos?.data?.map(
         video =>

@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const RAPID_API_KEY_1 = import.meta.env.VITE_RAPID_API_KEY_1
 const RAPID_API_KEY_2 = import.meta.env.VITE_RAPID_API_KEY_2
-const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 export const fetchData = async (url, signal) => {
   const RAPID_API_HOST = 'youtube-v31.p.rapidapi.com'
@@ -35,6 +34,7 @@ export const fetchAutocomplete = async (url, signal) => {
   // }
   // const { data } = await axios.get(`https://${RAPID_API_HOST}/${url}`, options)
 
+  // const BASE_URL = 'https://clients1.google.com/complete'
   const BASE_URL = 'https://suggestqueries.google.com/complete'
   const options = {
     params: {
