@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
-import { fetchFromAPI } from '../../utils/fetchFromAPI'
+import { fetchData } from '../../utils/fetchFromAPI'
 import { Videos } from '.'
 import ReactPlayer from 'react-player'
 import { AspectRatio, SimpleGrid } from '@mantine/core'
@@ -17,7 +17,10 @@ export const VideoDetails = () => {
   const relatedVideos = useQuery(
     ['relatedVideos', videoId],
     async ({ signal }) =>
-      await fetchFromAPI(`video/related-contents/?id=${videoId}`, signal)
+      await fetchData(
+        `search?part=id,snippet&type=video&relatedToVideoId=${videoId}`,
+        signal
+      )
   )
 
   // useEffect(() => {

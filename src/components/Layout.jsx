@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Videos, Header, Navbar } from '.'
-import { fetchFromAPI } from '../../utils/fetchFromAPI'
+import { fetchData } from '../../utils/fetchFromAPI'
 
 export const Layout = () => {
   const [opened, setOpened] = useState(false)
@@ -12,7 +12,7 @@ export const Layout = () => {
   const videos = useQuery(
     ['videos', selectedCategory],
     async ({ signal }) =>
-      await fetchFromAPI(`search/?q=${selectedCategory}`, signal)
+      await fetchData(`search?part=snippet&q=${selectedCategory}`, signal)
   )
 
   return (

@@ -2,14 +2,15 @@ import { Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { Videos } from '.'
-import { fetchFromAPI } from '../../utils/fetchFromAPI'
+import { fetchData } from '../../utils/fetchFromAPI'
 
 export const SearchFeed = () => {
   const { searchTerm } = useParams()
 
   const searchVideos = useQuery(
     ['searchVideos', searchTerm],
-    async ({ signal }) => await fetchFromAPI(`search/?q=${searchTerm}`, signal)
+    async ({ signal }) =>
+      await fetchData(`search?part=snippet&q=${searchTerm}`, signal)
   )
 
   return (

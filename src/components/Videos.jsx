@@ -37,8 +37,8 @@ export const Videos = memo(({ videos }) => {
       {videos?.data?.map(
         video =>
           // video.id.videoId && <VideoCard key={video.id.videoId} video={video} />
-          video?.video?.videoId && (
-            <VideoCard key={video.video.videoId} video={video.video} />
+          video?.id?.videoId && (
+            <VideoCard key={video.id.videoId} video={video} />
           )
       )}
     </SimpleGrid>

@@ -1,28 +1,54 @@
 import axios from 'axios'
 
-// export const BASE_URL = 'https://youtube-v31.p.rapidapi.com'
-export const BASE_URL = 'https://youtube138.p.rapidapi.com'
+const RAPID_API_KEY_1 = import.meta.env.VITE_RAPID_API_KEY_1
+const RAPID_API_KEY_2 = import.meta.env.VITE_RAPID_API_KEY_2
+const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
-const options = {
-  // params: {
-  // maxResults: 50,
-  // },
-  headers: {
-    'X-RapidAPI-Key': import.meta.env.VITE_REACT_APP_RAPID_API_KEY,
-    // 'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
-    'X-RapidAPI-Host': 'youtube138.p.rapidapi.com',
-  },
-  // signal,
+export const fetchData = async (url, signal) => {
+  const RAPID_API_HOST = 'youtube-v31.p.rapidapi.com'
+  const options = {
+    params: {
+      maxResults: 50,
+    },
+    headers: {
+      'X-RapidAPI-Key': RAPID_API_KEY_1,
+      'X-RapidAPI-Host': RAPID_API_HOST,
+    },
+    signal,
+  }
+  const { data } = await axios.get(`https://${RAPID_API_HOST}/${url}`, options)
+
+  const uniqueVideos = [
+    ...new Map(data?.items?.map(v => [v?.id?.videoId, v])).values(),
+  ]
+  return uniqueVideos
 }
 
-export const fetchFromAPI = async (url, signal) => {
-  const { data } = await axios.get(`${BASE_URL}/${url}`, { ...options, signal })
-  if (data?.contents) {
-    const uniqueVideos = [
-      ...new Map(data?.contents?.map(v => [v?.video?.videoId, v])).values(),
-    ]
-    return uniqueVideos
-  } else {
-    return data?.results
+export const fetchAutocomplete = async (url, signal) => {
+  // const RAPID_API_HOST = 'youtube138.p.rapidapi.com'
+  // const options = {
+  //   headers: {
+  //     'X-RapidAPI-Key': RAPID_API_KEY_2,
+  //     'X-RapidAPI-Host': RAPID_API_HOST,
+  //   },
+  //   signal,
+  // }
+  // const { data } = await axios.get(`https://${RAPID_API_HOST}/${url}`, options)
+
+  const BASE_URL = 'https://suggestqueries.google.com/complete'
+  const options = {
+    params: {
+      ds: 'yt',
+      client: 'firefox',
+      // client: 'youtube',
+    },
+    // adapter: 'jsonpAdapter',
+    // headers: {
+    //   'Content-Type': 'application/json;charset=UTF-8',
+    //   'Access-Control-Allow-Origin': '*',
+    // },
+    signal,
   }
+  const { data } = await axios.get(`${BASE_URL}/${url}`, options)
+  return data?.[1]
 }

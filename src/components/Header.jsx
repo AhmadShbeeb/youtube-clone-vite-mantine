@@ -12,7 +12,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
-import { fetchFromAPI } from '../../utils/fetchFromAPI'
+import { fetchAutocomplete } from '../../utils/fetchFromAPI'
 
 export const Header = ({ opened, setOpened }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
@@ -27,7 +27,11 @@ export const Header = ({ opened, setOpened }) => {
   const { data: autoCompleteData } = useQuery(
     ['autoCompleteData', debouncedSearchTerm],
     async ({ signal }) =>
-      await fetchFromAPI(`auto-complete/?q=${debouncedSearchTerm}`, signal),
+      await fetchAutocomplete(
+        // `auto-complete/?q=${debouncedSearchTerm}`,
+        `search?q=${debouncedSearchTerm}`,
+        signal
+      ),
     {
       enabled: !!debouncedSearchTerm,
       keepPreviousData: true,
