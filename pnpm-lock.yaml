@@ -11,6 +11,7 @@ specifiers:
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.1.0
   axios: ^0.27.2
+  axios-jsonp: ^1.0.4
   react: ^18.2.0
   react-dom: ^18.2.0
   react-player: ^2.11.0
@@ -26,6 +27,7 @@ dependencies:
   '@tanstack/react-query': 4.9.0_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.9.0_deywjuordwfceo4ntvg532uqbq
   axios: 0.27.2
+  axios-jsonp: 1.0.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-player: 2.11.0_react@18.2.0
@@ -761,6 +763,10 @@ packages:
 
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+    dev: false
+
+  /axios-jsonp/1.0.4:
+    resolution: {integrity: sha512-KI5Fc4ery6DR+oneXG09hPZfGuNUW8Lblhe750h53Z0Eh5MRsrHn49YitDU4RsMk0HV+12zcvL2Q51QkOLGdIQ==}
     dev: false
 
   /axios/0.27.2:

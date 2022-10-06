@@ -21,10 +21,10 @@ export const Header = ({ opened, setOpened }) => {
 
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 500)
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 250)
   const queryClient = useQueryClient()
 
-  const { data: autoCompleteData } = useQuery(
+  let { data: autoCompleteData } = useQuery(
     ['autoCompleteData', debouncedSearchTerm],
     async ({ signal }) =>
       await fetchAutocomplete(
@@ -40,6 +40,9 @@ export const Header = ({ opened, setOpened }) => {
       // onSuccess: data => setQueryResult(data),
     }
   )
+
+  if (!autoCompleteData || (autoCompleteData && !searchTerm))
+    autoCompleteData = []
 
   const fetchSearchQuery = e => {
     e.preventDefault()
@@ -139,7 +142,7 @@ export const Header = ({ opened, setOpened }) => {
             placeholder='Search'
             value={searchTerm}
             onChange={setSearchTerm}
-            data={autoCompleteData || []}
+            data={autoCompleteData}
             limit={5}
             sx={theme => ({
               width: '80%',
