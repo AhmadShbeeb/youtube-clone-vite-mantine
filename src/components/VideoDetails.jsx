@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react'
-import { useParams, useOutletContext } from 'react-router-dom'
+import { useParams, useOutletContext, Link } from 'react-router-dom'
 import { fetchData } from '../../utils/fetchFromAPI'
 import { Videos } from '.'
 import ReactPlayer from 'react-player'
-import { AspectRatio, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
-import { Box } from '@mantine/core'
-import { ScrollArea } from '@mantine/core'
-import { Paper } from '@mantine/core'
-import { Skeleton } from '@mantine/core'
+import {
+  AspectRatio,
+  SimpleGrid,
+  Paper,
+  Box,
+  ScrollArea,
+  Skeleton,
+  Text,
+} from '@mantine/core'
 
 export const VideoDetails = () => {
   const { videoId } = useParams()
-  // const {
-  //   // videos,
-  //   // setVideos
-  // } = useOutletContext()
-  const [videoDetails, setVideoDetails] = useState(null)
 
   const relatedVideos = useQuery(
     ['relatedVideos', videoId],
@@ -27,24 +26,21 @@ export const VideoDetails = () => {
       )
   )
 
-  // useEffect(() => {
-  //   // relatedVideos?.refetch()
-  //   console.log('refetch')
-  //   //   // setVideos(null)
-  //   //   // setVideoDetails(null)
+  const { data: videoDetails, isFetching } = useQuery(
+    ['videoDetails', videoId],
+    async ({ signal }) => {
+      const data = await fetchData(
+        `videos?part=contentDetails,snippet,statistics&id=${videoId}`,
+        signal
+      )
+      return data[0]
+    }
+  )
 
-  //   //   // fetchFromAPI(`video/details/?id=${videoId}`).then(data =>
-  //   //   //   setVideoDetails(data)
-  //   //   // )
-  //   //   // fetchFromAPI(`video/related-contents/?id=${videoId}`).then(data => {
-  //   //   //   const uniqueVideos = [
-  //   //   //     ...new Map(data.contents.map(v => [v?.video?.videoId, v])).values(),
-  //   //   //   ]
-  //   //   //   // setVideos(uniqueVideos)
-  //   //   // })
-
-  //   //   // console.log(videoDetails)
-  // }, [videoId])
+  const formatDate = dateString => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
 
   return (
     <SimpleGrid
@@ -53,14 +49,59 @@ export const VideoDetails = () => {
       breakpoints={[{ maxWidth: 'lg', cols: 1, spacing: 'sm' }]}
     >
       <Box sx={{ gridColumn: '1/4' }}>
-        {/* <Skeleton visible={loading}> */}
-        <ReactPlayer
-          url={`https://www.youtube.com/watch?v=${videoId}`}
-          controls
-          width='900px'
-          height='480px'
-        />
-        {/* </Skeleton> */}
+        <Skeleton circle visible={isFetching}>
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${videoId}`}
+            controls
+            // width='900px'
+            width='100%'
+            height='450px'
+          />
+        </Skeleton>
+        <Skeleton radius='md' height={76} visible={isFetching} mt={4}>
+          <Text weight={700} size='lg'>
+            {videoDetails?.snippet?.title}
+          </Text>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              gap: '10px',
+              // paddingBlock: '0px',
+            }}
+          >
+            <Text weight={500} size='md' color='dimmed'>
+              {parseInt(videoDetails?.statistics?.viewCount).toLocaleString()}{' '}
+              views
+            </Text>
+            <Text
+              weight={500}
+              size='md'
+              color='dimmed'
+              // style={{ flex: '1 0 auto' }}
+            >
+              {formatDate(videoDetails?.snippet?.publishedAt)}
+            </Text>
+
+            <Text
+              weight={500}
+              size='md'
+              color='dimmed'
+              style={{ marginLeft: 'auto' }}
+            >
+              {parseInt(videoDetails?.statistics?.likeCount).toLocaleString()}{' '}
+              likes
+            </Text>
+          </div>
+          <Text
+            weight={500}
+            size='md'
+            component={Link}
+            to={`/channel/${videoDetails?.snippet?.channelId}`}
+          >
+            {videoDetails?.snippet?.channelTitle}
+          </Text>
+        </Skeleton>
       </Box>
 
       <Paper
@@ -72,7 +113,7 @@ export const VideoDetails = () => {
         scrollHideDelay={500}
         sx={{
           maxWidth: '25vw',
-          height: '80vh',
+          height: '82vh',
           display: 'flex',
           position: 'relative',
         }}

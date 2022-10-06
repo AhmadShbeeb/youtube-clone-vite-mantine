@@ -14,6 +14,7 @@ export const VideoCard = ({
       radius='md'
       withBorder
       sx={{ height: 300, maxWidth: 320 }}
+      // sx={{ height: '45vh', maxWidth: 320 }}
     >
       <Card.Section component={Link} to={`/video/${videoId}`}>
         <AspectRatio
