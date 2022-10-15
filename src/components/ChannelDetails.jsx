@@ -6,6 +6,10 @@ import { fetchData } from '../../utils/fetchFromAPI'
 
 export const ChannelDetails = () => {
   const { channelId } = useParams()
+  const formatter = Intl.NumberFormat('en', {
+    notation: 'compact',
+    maximumFractionDigits: 3,
+  })
 
   const channelVideos = useQuery(
     ['channelVideos', channelId],
@@ -50,9 +54,7 @@ export const ChannelDetails = () => {
               color='dimmed'
               sx={{ backgroundColor: 'rgba(0, 0, 0, 0.74)' }}
             >
-              {parseInt(
-                channleDetails?.statistics?.subscriberCount
-              ).toLocaleString()}{' '}
+              {formatter.format(channleDetails?.statistics?.subscriberCount)}{' '}
               subscribers
             </Text>
           </Center>

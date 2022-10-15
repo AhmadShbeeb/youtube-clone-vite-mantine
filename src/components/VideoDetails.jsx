@@ -16,6 +16,10 @@ import {
 
 export const VideoDetails = () => {
   const { videoId } = useParams()
+  const formatter = Intl.NumberFormat('en', {
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  })
 
   const relatedVideos = useQuery(
     ['relatedVideos', videoId],
@@ -89,8 +93,7 @@ export const VideoDetails = () => {
               color='dimmed'
               style={{ marginLeft: 'auto' }}
             >
-              {parseInt(videoDetails?.statistics?.likeCount).toLocaleString()}{' '}
-              likes
+              {formatter.format(videoDetails?.statistics?.likeCount)} likes
             </Text>
           </div>
           <Text
