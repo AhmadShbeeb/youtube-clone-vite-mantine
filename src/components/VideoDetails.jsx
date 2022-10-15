@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useOutletContext, Link } from 'react-router-dom'
-import { fetchData } from '../../utils/fetchFromAPI'
+import { fetchData, fetchDislikes } from '../../utils/fetchFromAPI'
 import { Videos } from '.'
 import ReactPlayer from 'react-player'
 import { useQuery } from '@tanstack/react-query'
@@ -16,10 +16,15 @@ import {
 
 export const VideoDetails = () => {
   const { videoId } = useParams()
-  const formatter = Intl.NumberFormat('en', {
+  const formatNumber = Intl.NumberFormat('en', {
     notation: 'compact',
     maximumFractionDigits: 1,
   })
+
+  const formatDate = dateString => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
 
   const relatedVideos = useQuery(
     ['relatedVideos', videoId],
@@ -41,10 +46,11 @@ export const VideoDetails = () => {
     }
   )
 
-  const formatDate = dateString => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(dateString).toLocaleDateString(undefined, options)
-  }
+  const { data: videoDislikes } = useQuery(
+    ['videoDislikes', videoId],
+    async ({ signal }) =>
+      await fetchDislikes(`votes?videoId=${videoId}`, signal)
+  )
 
   return (
     <SimpleGrid
@@ -53,7 +59,7 @@ export const VideoDetails = () => {
       breakpoints={[{ maxWidth: 'lg', cols: 1, spacing: 'sm' }]}
     >
       <Box sx={{ gridColumn: '1/4' }}>
-        <Skeleton circle visible={isFetching}>
+        <Skeleton radius='md' visible={isFetching}>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${videoId}`}
             controls
@@ -93,7 +99,15 @@ export const VideoDetails = () => {
               color='dimmed'
               style={{ marginLeft: 'auto' }}
             >
-              {formatter.format(videoDetails?.statistics?.likeCount)} likes
+              {formatNumber.format(videoDetails?.statistics?.likeCount)} likes
+            </Text>
+            <Text
+              weight={500}
+              size='md'
+              color='dimmed'
+              style={{ marginLeft: '1%' }}
+            >
+              {formatNumber.format(videoDislikes?.dislikes)} dislikes
             </Text>
           </div>
           <Text

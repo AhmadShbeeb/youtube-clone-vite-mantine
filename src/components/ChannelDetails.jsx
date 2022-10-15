@@ -6,7 +6,7 @@ import { fetchData } from '../../utils/fetchFromAPI'
 
 export const ChannelDetails = () => {
   const { channelId } = useParams()
-  const formatter = Intl.NumberFormat('en', {
+  const formatNumber = Intl.NumberFormat('en', {
     notation: 'compact',
     maximumFractionDigits: 3,
   })
@@ -54,7 +54,7 @@ export const ChannelDetails = () => {
               color='dimmed'
               sx={{ backgroundColor: 'rgba(0, 0, 0, 0.74)' }}
             >
-              {formatter.format(channleDetails?.statistics?.subscriberCount)}{' '}
+              {formatNumber.format(channleDetails?.statistics?.subscriberCount)}{' '}
               subscribers
             </Text>
           </Center>

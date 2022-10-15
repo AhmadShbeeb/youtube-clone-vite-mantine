@@ -37,7 +37,7 @@ export const fetchAutocomplete = async (url, signal) => {
 
   // A YT undocumented API for auto suggest search queries
   // const BASE_URL = 'https://clients1.google.com/complete'
-  const BASE_URL = 'https://suggestqueries.google.com/complete'
+  const AUTO_URL = 'https://suggestqueries.google.com/complete'
   const options = {
     params: {
       ds: 'yt',
@@ -46,7 +46,17 @@ export const fetchAutocomplete = async (url, signal) => {
     signal,
     adapter: jsonpAdapter,
   }
-  const { data } = await axios.get(`${BASE_URL}/${url}`, options)
+  const { data } = await axios.get(`${AUTO_URL}/${url}`, options)
 
   return data?.[1]?.map(item => item[0])
+}
+
+export const fetchDislikes = async (url, signal) => {
+  const DISLIKES_URL = 'returnyoutubedislikeapi.com'
+  const options = {
+    signal,
+  }
+  const { data } = await axios.get(`https://${DISLIKES_URL}/${url}`, options)
+  console.log(data)
+  return data
 }
